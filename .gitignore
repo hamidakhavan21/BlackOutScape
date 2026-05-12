@@ -1,0 +1,42 @@
+# Virtual environments
+/venv
+.venv
+venv
+# Python cache
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+*/*/*/*/__pycache__/
+common/sms_utils/melipayamak/sms/__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.sample
+.python-version
+
+# IDE / editor configs
+.idea
+.idea/*
+.vscode/
+
+# Databases / storage
+*.sqlite3
+dump.rdb
+celerybeat-schedule
+
+# Logs & runtime files
+logs/
+metrics/
+
+# Static & test files
+static-root
+.pytest_cache
+
+# Project-specific directories
+control/
+
+# Other
+*.xml
+*.iml
