@@ -4,6 +4,7 @@ from django.utils import timezone
 from apps.projects.models import Project
 from core.utils.models.base_models import TimestampedModel
 
+
 class NotificationStatus(models.TextChoices):
     PENDING = "PENDING", "Pending"
     PROCESSING = "PROCESSING", "Processing"
@@ -43,9 +44,7 @@ class Notification(TimestampedModel):
         null=True,
         blank=True,
     )
-    idempotency_key = models.UUIDField(
-        unique=True
-    )
+    idempotency_key = models.UUIDField(unique=True)
 
     class Meta:
         ordering = ["-created_at"]

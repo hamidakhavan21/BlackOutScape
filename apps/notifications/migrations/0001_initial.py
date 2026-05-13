@@ -6,32 +6,63 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('projects', '0001_initial'),
+        ("projects", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Notification',
+            name="Notification",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('external_id', models.CharField(max_length=255, unique=True)),
-                ('payload', models.JSONField()),
-                ('status', models.CharField(choices=[('PENDING', 'Pending'), ('PROCESSING', 'Processing'), ('RETRYING', 'Retrying'), ('DELIVERED', 'Delivered'), ('FAILED', 'Failed'), ('DEAD_LETTER', 'Dead Letter')], default='PENDING', max_length=32)),
-                ('retry_count', models.PositiveIntegerField(default=0)),
-                ('max_retries', models.PositiveIntegerField(default=5)),
-                ('scheduled_at', models.DateTimeField(default=django.utils.timezone.now)),
-                ('delivered_at', models.DateTimeField(blank=True, null=True)),
-                ('idempotency_key', models.UUIDField(unique=True)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notifications', to='projects.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("external_id", models.CharField(max_length=255, unique=True)),
+                ("payload", models.JSONField()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("PENDING", "Pending"),
+                            ("PROCESSING", "Processing"),
+                            ("RETRYING", "Retrying"),
+                            ("DELIVERED", "Delivered"),
+                            ("FAILED", "Failed"),
+                            ("DEAD_LETTER", "Dead Letter"),
+                        ],
+                        default="PENDING",
+                        max_length=32,
+                    ),
+                ),
+                ("retry_count", models.PositiveIntegerField(default=0)),
+                ("max_retries", models.PositiveIntegerField(default=5)),
+                (
+                    "scheduled_at",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                ("delivered_at", models.DateTimeField(blank=True, null=True)),
+                ("idempotency_key", models.UUIDField(unique=True)),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="notifications",
+                        to="projects.project",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-created_at'],
+                "ordering": ["-created_at"],
             },
         ),
     ]

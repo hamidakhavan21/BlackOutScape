@@ -3,6 +3,7 @@ from django.db import models
 from apps.notifications.models import Notification
 from core.utils.models.base_models import CreatedModel
 
+
 class DeliveryAttemptStatus(models.TextChoices):
     SUCCESS = "SUCCESS", "Success"
     FAILURE = "FAILURE", "Failure"
@@ -36,9 +37,9 @@ class DeliveryAttempt(CreatedModel):
         blank=True,
     )
     provider_message_id = models.CharField(
-    max_length=255,
-    null=True,
-    blank=True,
+        max_length=255,
+        null=True,
+        blank=True,
     )
 
     class Meta:

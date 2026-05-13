@@ -4,24 +4,33 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Project',
+            name="Project",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('name', models.CharField(max_length=255)),
-                ('api_key_key', models.CharField(editable=False, max_length=64, unique=True)),
-                ('rate_limit', models.PositiveIntegerField(default=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("name", models.CharField(max_length=255)),
+                (
+                    "api_key_key",
+                    models.CharField(editable=False, max_length=64, unique=True),
+                ),
+                ("rate_limit", models.PositiveIntegerField(default=100)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

@@ -1,8 +1,7 @@
-import secrets
-
 from django.db import models
 
 from core.utils.models.base_models import CreatedModel
+
 
 class Project(CreatedModel):
     name = models.CharField(max_length=255)

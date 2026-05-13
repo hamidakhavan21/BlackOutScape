@@ -1,30 +1,18 @@
-from django.utils import timezone
 from django.db import transaction
+from django.utils import timezone
 
-from apps.deliveries.models import (
-    DeliveryAttempt,
-    DeliveryAttemptStatus,
-)
-
-from apps.notifications.models import (
-    Notification,
-    NotificationStatus,
-)
-
-from apps.providers.sms.kavenegar.provider import (
-    KavenegarProvider,
-)
-from core.logging.logger import logger
+from apps.deliveries.models import DeliveryAttempt, DeliveryAttemptStatus
+from apps.notifications.models import Notification, NotificationStatus
 from apps.providers.router import ProviderRouter
+from core.logging.logger import logger
+
 
 class NotificationDeliveryService:
-
     provider_name, provider = ProviderRouter.get_provider()
-    
+
     @classmethod
     def deliver(cls, notification: Notification):
         with transaction.atomic():
-            
             if notification.status == NotificationStatus.DELIVERED:
                 return
 
@@ -37,7 +25,7 @@ class NotificationDeliveryService:
                     extra={
                         "notification_id": notification.id,
                         "external_id": notification.external_id,
-                    }
+                    },
                 )
                 response = cls.provider.send(notification.payload)
 
@@ -60,7 +48,6 @@ class NotificationDeliveryService:
                 )
 
             except Exception as exc:
-
                 DeliveryAttempt.objects.create(
                     notification=notification,
                     status=DeliveryAttemptStatus.FAILURE,

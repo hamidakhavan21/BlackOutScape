@@ -5,11 +5,8 @@ import uuid
 from apps.providers.base.provider import BaseProvider
 
 
-
 class KavenegarProvider(BaseProvider):
-
     def send(self, payload: dict) -> dict:
-
         latency = random.randint(100, 1000)
 
         time.sleep(latency / 1000)
@@ -25,5 +22,3 @@ class KavenegarProvider(BaseProvider):
             "status": "sent",
             "provider_message_id": str(uuid.uuid4()),
         }
-
-            

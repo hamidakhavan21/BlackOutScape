@@ -8,4 +8,4 @@ def exponential_backoff(retry_count: int) -> int:
     3 -> 8s
     """
 
-    return min(2 ** retry_count, 300)
+    return min(2**retry_count, 300)

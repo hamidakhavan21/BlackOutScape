@@ -1,30 +1,21 @@
 from celery import shared_task
 
-from apps.notifications.models import (
-    Notification,
-    NotificationStatus,
-)
-
-from services.delivery_services import (
-    NotificationDeliveryService,
-)
-
+from apps.notifications.models import Notification, NotificationStatus
 from core.retry.backoff import exponential_backoff
+from services.delivery_services import NotificationDeliveryService
+
 
 @shared_task(bind=True, max_retries=5)
 def process_notification(self, notification_id):
     notification = Notification.objects.get(id=notification_id)
 
     try:
-
         NotificationDeliveryService.deliver(notification)
 
     except Exception:
-
         notification.retry_count += 1
 
         if notification.retry_count >= notification.max_retries:
-
             notification.status = NotificationStatus.DEAD_LETTER
 
             notification.save(

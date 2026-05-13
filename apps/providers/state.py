@@ -1,6 +1,5 @@
 from collections import defaultdict
 
-
 provider_failures = defaultdict(int)
 
 
