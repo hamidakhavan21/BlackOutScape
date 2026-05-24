@@ -45,6 +45,9 @@ class Notification(TimestampedModel):
         blank=True,
     )
     idempotency_key = models.UUIDField(unique=True)
+    payload_hash = models.CharField(
+        max_length=64,
+    )
 
     class Meta:
         ordering = ["-created_at"]
